@@ -1,5 +1,9 @@
 package com.example.android.popularmovies;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,5 +32,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mMovieListRv.setAdapter(mAdapter);
+    }
+
+    private boolean checkNetworkConnection() {
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork.isConnected();
+        return isConnected;
     }
 }
