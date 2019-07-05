@@ -26,6 +26,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.single_movie, viewGroup, false);
+        view.getLayoutParams().height = viewGroup.getMeasuredHeight()/2;
         MovieViewHolder movieViewHolder = new MovieViewHolder(view);
         return movieViewHolder;
     }

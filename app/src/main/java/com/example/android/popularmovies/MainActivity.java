@@ -9,12 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int MOVIE_LOADER_ID = 1;
+    private ProgressBar mLoadingProgressBar;
     private RecyclerView mMovieListRv;
     private MovieListAdapter mAdapter;
     private List<Movie> mMovieList;
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mLoadingProgressBar = findViewById(R.id.pb_loading);
         mMovieListRv = findViewById(R.id.rv_movie_list);
         mMovieListRv.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
         mAdapter = new MovieListAdapter(this, mMovieList, new MovieListAdapter.OnListItemClickListener() {
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movies) {
+        mLoadingProgressBar.setVisibility(View.INVISIBLE);
         mMovieList = movies;
         mAdapter.updateDataSet(mMovieList);
     }
