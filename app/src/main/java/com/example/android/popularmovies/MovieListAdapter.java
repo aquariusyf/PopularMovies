@@ -43,6 +43,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return 0;
     }
 
+    public void updateDataSet(List<Movie> newMovieList) {
+        mMovies = newMovieList;
+        notifyDataSetChanged();
+    }
+
     interface OnListItemClickListener {
         void onItemClick(int position);
     }

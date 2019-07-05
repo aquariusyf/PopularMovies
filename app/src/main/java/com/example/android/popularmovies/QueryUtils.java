@@ -11,19 +11,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.List;
 
 public class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
-    private static final String URL_BASE = "http://api.themoviedb.org/3/movie/";
+    private static final String URL_BASE = "http://api.themoviedb.org/3/movie/popular/";
     private static final String PARAM_API_KEY = "api_key";
     private static final String PARAM_SORT_BY = "sort_by";
     private static final String KEY = "4f2511f01aba7a30079a4c8874ad7f8f";
     private static final String POPULARITY = "popularity.desc";
     private static final String RATING = "vote_average.desc";
-
-
-    public QueryUtils(){}
 
     public static URL createSortByPopularityUrl() {
         Uri uri = Uri.parse(URL_BASE).buildUpon()
@@ -53,10 +51,11 @@ public class QueryUtils {
         return url;
     }
 
-    public static String makeHTTPRequest(URL url) throws IOException {
-        String JSONRespose = "";
+    private static String makeHTTPRequest(URL url) throws IOException {
+        String JSONResponse = "";
         if(url == null)
-            return JSONRespose;
+            return JSONResponse;
+        Log.v(LOG_TAG, "Making request: " + url.toString());
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         try {
@@ -65,11 +64,11 @@ public class QueryUtils {
             urlConnection.connect();
             if(urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
-                JSONRespose = readFromInputStream(inputStream);
+                JSONResponse = readFromInputStream(inputStream);
             }
             else {
                 Log.e(LOG_TAG, "HTTP Response Code: " + urlConnection.getResponseCode());
-                JSONRespose = "";
+                JSONResponse = "";
             }
         } catch (IOException e) {
             Log.e(LOG_TAG, "IOEXCEPTION: " + e.toString());
@@ -79,7 +78,7 @@ public class QueryUtils {
             if(inputStream != null)
                 inputStream.close();
         }
-        return JSONRespose;
+        return JSONResponse;
     }
 
     private static String readFromInputStream(InputStream inputStream) throws IOException{
@@ -94,5 +93,17 @@ public class QueryUtils {
             }
         }
         return output.toString();
+    }
+
+    public static List<Movie> fetchMovieData(URL url) {
+        String jsonResponse = null;
+        try {
+            jsonResponse = makeHTTPRequest(url);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Failed to make HTTP request", e);
+
+        }
+        List<Movie> movieList = JsonUtils.parseMovieJson(jsonResponse);
+        return movieList;
     }
 }

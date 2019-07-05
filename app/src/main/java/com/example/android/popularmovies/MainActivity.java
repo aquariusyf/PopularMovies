@@ -2,18 +2,20 @@ package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final int MOVIE_LOADER_ID = 1;
     private RecyclerView mMovieListRv;
     private MovieListAdapter mAdapter;
     private List<Movie> mMovieList;
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mMovieListRv.setAdapter(mAdapter);
+        if(checkNetworkConnection()) {
+            getSupportLoaderManager().initLoader(MOVIE_LOADER_ID, null, this);
+        }
     }
 
     private boolean checkNetworkConnection() {
@@ -39,5 +44,21 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork.isConnected();
         return isConnected;
+    }
+
+    @Override
+    public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
+        return new MovieLoader(this);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movies) {
+        mMovieList = movies;
+        mAdapter.updateDataSet(mMovieList);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Movie>> loader) {
+        mAdapter.updateDataSet(null);
     }
 }
