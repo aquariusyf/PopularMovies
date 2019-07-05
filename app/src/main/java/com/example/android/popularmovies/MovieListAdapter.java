@@ -14,10 +14,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private static final String LOG_TAG = MovieListAdapter.class.getSimpleName();
     private Context mContext;
-    private List<String> mMovies;
+    private List<Movie> mMovies;
     private OnListItemClickListener mOnListItemClickListener;
 
-    public MovieListAdapter(Context context, List<String> movies, OnListItemClickListener onListItemClickListener) {
+    public MovieListAdapter(Context context, List<Movie> movies, OnListItemClickListener onListItemClickListener) {
         mContext = context;
         mMovies = movies;
         mOnListItemClickListener = onListItemClickListener;
@@ -32,7 +32,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        Picasso.get().load(Uri.parse(mMovies.get(position))).into(((MovieViewHolder) viewHolder).singleMovieIv);
+        Picasso.get().load(Uri.parse(mMovies.get(position).getPoster())).into(((MovieViewHolder) viewHolder).singleMovieIv);
     }
 
     @Override

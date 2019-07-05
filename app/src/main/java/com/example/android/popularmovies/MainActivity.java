@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mMovieListRv;
     private MovieListAdapter mAdapter;
-    private List<String> mMovieList;
+    private List<Movie> mMovieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
