@@ -9,15 +9,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static final int MOVIE_LOADER_ID = 1;
+    private static final int MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR = 1;
+    private static final int MOVIE_LOADER_ID_SORT_BY_TOP_RATED = 2;
     private ProgressBar mLoadingProgressBar;
     private RecyclerView mMovieListRv;
     private MovieListAdapter mAdapter;
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
         mMovieListRv.setAdapter(mAdapter);
         if(checkNetworkConnection()) {
-            getSupportLoaderManager().initLoader(MOVIE_LOADER_ID, null, this);
+            getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR, null, this);
         }
     }
 
@@ -51,8 +56,33 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_sort, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sort_by_most_popular:
+                mLoadingProgressBar.setVisibility(View.VISIBLE);
+                getSupportLoaderManager().restartLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR, null, this);
+                break;
+            case R.id.action_sort_by_top_rated:
+                mLoadingProgressBar.setVisibility(View.VISIBLE);
+                getSupportLoaderManager().restartLoader(MOVIE_LOADER_ID_SORT_BY_TOP_RATED, null, this);
+                break;
+            default: break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
-        return new MovieLoader(this);
+        if(i == MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR)
+            return new MovieLoader(this, QueryUtils.createSortByPopularityUrl());
+        else
+            return new MovieLoader(this, QueryUtils.createSortByRatingUrl());
     }
 
     @Override
@@ -60,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mLoadingProgressBar.setVisibility(View.INVISIBLE);
         mMovieList = movies;
         mAdapter.updateDataSet(mMovieList);
+        Log.v(LOG_TAG, "Adapter updated: " + loader.getId());
     }
 
     @Override

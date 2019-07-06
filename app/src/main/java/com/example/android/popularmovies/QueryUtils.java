@@ -16,7 +16,8 @@ import java.util.List;
 public class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
-    private static final String URL_BASE = "http://api.themoviedb.org/3/movie/popular/";
+    private static final String URL_BASE_POPULAR = "http://api.themoviedb.org/3/movie/popular/";
+    private static final String URL_BASE_TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated/";
     private static final String PARAM_API_KEY = "api_key";
     private static final String PARAM_SORT_BY = "sort_by";
     private static final String KEY = "4f2511f01aba7a30079a4c8874ad7f8f";
@@ -24,7 +25,7 @@ public class QueryUtils {
     private static final String RATING = "vote_average.desc";
 
     public static URL createSortByPopularityUrl() {
-        Uri uri = Uri.parse(URL_BASE).buildUpon()
+        Uri uri = Uri.parse(URL_BASE_POPULAR).buildUpon()
                   .appendQueryParameter(PARAM_API_KEY, KEY)
                   .appendQueryParameter(PARAM_SORT_BY, POPULARITY).build();
         URL url;
@@ -38,9 +39,9 @@ public class QueryUtils {
     }
 
     public static URL createSortByRatingUrl() {
-        Uri uri = Uri.parse(URL_BASE).buildUpon()
+        Uri uri = Uri.parse(URL_BASE_TOP_RATED).buildUpon()
                   .appendQueryParameter(PARAM_API_KEY, KEY)
-                  .appendQueryParameter(PARAM_SORT_BY, POPULARITY).build();
+                  .appendQueryParameter(PARAM_SORT_BY, RATING).build();
         URL url;
         try {
             url = new URL(uri.toString());
