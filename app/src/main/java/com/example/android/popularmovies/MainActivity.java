@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter = new MovieListAdapter(this, mMovieList, new MovieListAdapter.OnListItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //TODO: Go to movie details;
                 Intent movieDetail = new Intent(MainActivity.this, MovieDetailActivity.class);
                 Bundle movieDetailBundle = new Bundle();
                 movieDetailBundle.putString(MovieDetailActivity.TITLE, mMovieList.get(position).getName());
@@ -75,11 +74,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         switch (item.getItemId()) {
             case R.id.action_sort_by_most_popular:
                 mLoadingProgressBar.setVisibility(View.VISIBLE);
-                getSupportLoaderManager().restartLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR, null, this);
+                getSupportLoaderManager().destroyLoader(MOVIE_LOADER_ID_SORT_BY_TOP_RATED);
+                getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR, null, this);
                 break;
             case R.id.action_sort_by_top_rated:
                 mLoadingProgressBar.setVisibility(View.VISIBLE);
-                getSupportLoaderManager().restartLoader(MOVIE_LOADER_ID_SORT_BY_TOP_RATED, null, this);
+                getSupportLoaderManager().destroyLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR);
+                getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_TOP_RATED, null, this);
                 break;
             default: break;
         }

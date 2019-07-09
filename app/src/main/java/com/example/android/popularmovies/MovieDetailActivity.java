@@ -71,5 +71,4 @@ public class MovieDetailActivity extends AppCompatActivity {
         mUserRatingTv.setText(userRating + OUT_OF_TEN);
         Picasso.get().load(Uri.parse(poster)).into(mPosterIv);
     }
-
 }
