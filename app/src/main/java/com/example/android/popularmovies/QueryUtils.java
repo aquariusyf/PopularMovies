@@ -20,7 +20,7 @@ public class QueryUtils {
     private static final String URL_BASE_TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated/";
     private static final String PARAM_API_KEY = "api_key";
     private static final String PARAM_SORT_BY = "sort_by";
-    private static final String KEY = "4f2511f01aba7a30079a4c8874ad7f8f";
+    private static final String KEY = ""; //Put the API key here
     private static final String POPULARITY = "popularity.desc";
     private static final String RATING = "vote_average.desc";
 
