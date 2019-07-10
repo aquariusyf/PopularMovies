@@ -30,7 +30,8 @@ public class JsonUtils {
             List<Movie> movieList = new ArrayList<>();
             for(int i = 0; i < resultArray.length(); i++) {
                 String title = resultArray.getJSONObject(i).getString(TITLE);
-                String poster = POSTER_BASE_URL + POSTER_SIZE + resultArray.getJSONObject(i).getString(POSTER_PATH);
+                String poster = POSTER_BASE_URL + POSTER_SIZE
+                        + resultArray.getJSONObject(i).getString(POSTER_PATH);
                 String releaseDate = resultArray.getJSONObject(i).getString(RELEASE_DATE);
                 String overView = resultArray.getJSONObject(i).getString(OVERVIEW);
                 String userRating = resultArray.getJSONObject(i).getString(USER_RATING);

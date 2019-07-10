@@ -35,29 +35,41 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mLoadingProgressBar = findViewById(R.id.pb_loading);
         mMovieListRv = findViewById(R.id.rv_movie_list);
-        mMovieListRv.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
+        mMovieListRv.setLayoutManager(new GridLayoutManager(this,
+                2,
+                GridLayoutManager.VERTICAL,
+                false));
         mAdapter = new MovieListAdapter(this, mMovieList, new MovieListAdapter.OnListItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent movieDetail = new Intent(MainActivity.this, MovieDetailActivity.class);
+                Intent movieDetail = new Intent(MainActivity.this,
+                        MovieDetailActivity.class);
                 Bundle movieDetailBundle = new Bundle();
-                movieDetailBundle.putString(MovieDetailActivity.TITLE, mMovieList.get(position).getName());
-                movieDetailBundle.putString(MovieDetailActivity.POSTER, mMovieList.get(position).getPoster());
-                movieDetailBundle.putString(MovieDetailActivity.RELEASE_DATE, mMovieList.get(position).getReleaseDate());
-                movieDetailBundle.putString(MovieDetailActivity.OVERVIEW, mMovieList.get(position).getOverView());
-                movieDetailBundle.putString(MovieDetailActivity.USER_RATING, mMovieList.get(position).getUserRating());
+                movieDetailBundle.putString(MovieDetailActivity.TITLE,
+                        mMovieList.get(position).getName());
+                movieDetailBundle.putString(MovieDetailActivity.POSTER,
+                        mMovieList.get(position).getPoster());
+                movieDetailBundle.putString(MovieDetailActivity.RELEASE_DATE,
+                        mMovieList.get(position).getReleaseDate());
+                movieDetailBundle.putString(MovieDetailActivity.OVERVIEW,
+                        mMovieList.get(position).getOverView());
+                movieDetailBundle.putString(MovieDetailActivity.USER_RATING,
+                        mMovieList.get(position).getUserRating());
                 movieDetail.putExtras(movieDetailBundle);
                 startActivity(movieDetail);
             }
         });
         mMovieListRv.setAdapter(mAdapter);
         if(checkNetworkConnection()) {
-            getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR, null, this);
+            getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR,
+                    null,
+                    this);
         }
     }
 
     private boolean checkNetworkConnection() {
-        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork.isConnected();
         return isConnected;
@@ -75,12 +87,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             case R.id.action_sort_by_most_popular:
                 mLoadingProgressBar.setVisibility(View.VISIBLE);
                 getSupportLoaderManager().destroyLoader(MOVIE_LOADER_ID_SORT_BY_TOP_RATED);
-                getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR, null, this);
+                getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR,
+                        null,
+                        this);
                 break;
             case R.id.action_sort_by_top_rated:
                 mLoadingProgressBar.setVisibility(View.VISIBLE);
                 getSupportLoaderManager().destroyLoader(MOVIE_LOADER_ID_SORT_BY_MOST_POPULAR);
-                getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_TOP_RATED, null, this);
+                getSupportLoaderManager().initLoader(MOVIE_LOADER_ID_SORT_BY_TOP_RATED,
+                        null,
+                        this);
                 break;
             default: break;
         }

@@ -85,7 +85,8 @@ public class QueryUtils {
     private static String readFromInputStream(InputStream inputStream) throws IOException{
         StringBuilder output = new StringBuilder();
         if(inputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
             while(line != null) {
