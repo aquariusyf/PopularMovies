@@ -20,13 +20,12 @@ public class QueryUtils {
     private static final String URL_BASE_TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated/";
     private static final String PARAM_API_KEY = "api_key";
     private static final String PARAM_SORT_BY = "sort_by";
-    private static final String KEY = ""; //Put the API key here
     private static final String POPULARITY = "popularity.desc";
     private static final String RATING = "vote_average.desc";
 
     public static URL createSortByPopularityUrl() {
         Uri uri = Uri.parse(URL_BASE_POPULAR).buildUpon()
-                  .appendQueryParameter(PARAM_API_KEY, KEY)
+                  .appendQueryParameter(PARAM_API_KEY, BuildConfig.THE_MOVIE_DB_API_TOKEN)
                   .appendQueryParameter(PARAM_SORT_BY, POPULARITY).build();
         URL url;
         try {
@@ -40,7 +39,7 @@ public class QueryUtils {
 
     public static URL createSortByRatingUrl() {
         Uri uri = Uri.parse(URL_BASE_TOP_RATED).buildUpon()
-                  .appendQueryParameter(PARAM_API_KEY, KEY)
+                  .appendQueryParameter(PARAM_API_KEY, BuildConfig.THE_MOVIE_DB_API_TOKEN)
                   .appendQueryParameter(PARAM_SORT_BY, RATING).build();
         URL url;
         try {
