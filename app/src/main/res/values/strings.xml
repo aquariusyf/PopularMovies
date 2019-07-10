@@ -3,4 +3,6 @@
     <string name="action_sort_by_most_popular">Most Popular</string>
     <string name="action_sort_by_top_rated">Top Rated</string>
     <string name="movie_detail_activity_title">Movie Detail</string>
+    <string name="dummy_movie_title" translatable="false">Movie Title</string>
+    <string name="dummy_movie_overview" translatable="false">This is the overview of movie</string>
 </resources>

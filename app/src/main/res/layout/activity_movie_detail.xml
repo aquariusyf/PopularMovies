@@ -22,7 +22,7 @@
                 android:paddingLeft="@dimen/dimen_16dp"
                 android:gravity="center_vertical"
                 android:background="@color/colorMovieTitleBackground"
-                tools:text="Movie Title"
+                tools:text="@string/dummy_movie_title"
                 android:textSize="36sp"
                 android:textColor="@color/colorWhite"
                 android:fontFamily="monospace"
@@ -76,7 +76,7 @@
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:layout_marginLeft="@dimen/dimen_8dp"
                 android:layout_marginRight="@dimen/dimen_8dp"
-                tools:text="This is the overview of movie"
+                tools:text="@string/dummy_movie_overview"
                 android:textSize="18sp"
                 android:textColor="@color/colorGrey"
                 android:fontFamily="monospace"/>
