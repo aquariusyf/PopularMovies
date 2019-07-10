@@ -5,4 +5,5 @@
     <string name="movie_detail_activity_title">Movie Detail</string>
     <string name="dummy_movie_title" translatable="false">Movie Title</string>
     <string name="dummy_movie_overview" translatable="false">This is the overview of movie</string>
+    <string name="dummy_movie_rating" translatable="false">6.6/10</string>
 </resources>
