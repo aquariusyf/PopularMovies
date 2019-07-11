@@ -41,7 +41,7 @@
                     android:layout_width="@dimen/poster_width"
                     android:layout_height="@dimen/poster_height"
                     android:layout_marginLeft="@dimen/dimen_16dp"
-                    tools:src="@tools:sample/avatars"
+                    tools:src="@drawable/default_poster"
                     android:scaleType="fitXY"/>
 
                 <TextView

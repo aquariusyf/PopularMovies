@@ -3,10 +3,8 @@ package com.example.android.popularmovies.utils;
 import android.util.Log;
 
 import com.example.android.popularmovies.Movie;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,6 @@ public class JsonUtils {
     public static List<Movie> parseMovieJson(JSONObject json) {
         if(json == null)
             return null;
-
         try {
             JSONArray resultArray = json.getJSONArray(RESULT);
             List<Movie> movieList = new ArrayList<>();

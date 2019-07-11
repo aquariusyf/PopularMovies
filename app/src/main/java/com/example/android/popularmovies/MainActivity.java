@@ -46,25 +46,26 @@ public class MainActivity extends AppCompatActivity {
                 2,
                 GridLayoutManager.VERTICAL,
                 false));
-        mAdapter = new MovieListAdapter(this, mMovieList, new MovieListAdapter.OnListItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent movieDetail = new Intent(MainActivity.this,
-                        MovieDetailActivity.class);
-                Bundle movieDetailBundle = new Bundle();
-                movieDetailBundle.putString(MovieDetailActivity.TITLE,
-                        mMovieList.get(position).getName());
-                movieDetailBundle.putString(MovieDetailActivity.POSTER,
-                        mMovieList.get(position).getPoster());
-                movieDetailBundle.putString(MovieDetailActivity.RELEASE_DATE,
-                        mMovieList.get(position).getReleaseDate());
-                movieDetailBundle.putString(MovieDetailActivity.OVERVIEW,
-                        mMovieList.get(position).getOverView());
-                movieDetailBundle.putString(MovieDetailActivity.USER_RATING,
-                        mMovieList.get(position).getUserRating());
-                movieDetail.putExtras(movieDetailBundle);
-                startActivity(movieDetail);
-            }
+        mAdapter = new MovieListAdapter(this, mMovieList,
+                new MovieListAdapter.OnListItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent movieDetail = new Intent(MainActivity.this,
+                                MovieDetailActivity.class);
+                        Bundle movieDetailBundle = new Bundle();
+                        movieDetailBundle.putString(MovieDetailActivity.TITLE,
+                                mMovieList.get(position).getName());
+                        movieDetailBundle.putString(MovieDetailActivity.POSTER,
+                                mMovieList.get(position).getPoster());
+                        movieDetailBundle.putString(MovieDetailActivity.RELEASE_DATE,
+                                mMovieList.get(position).getReleaseDate());
+                        movieDetailBundle.putString(MovieDetailActivity.OVERVIEW,
+                                mMovieList.get(position).getOverView());
+                        movieDetailBundle.putString(MovieDetailActivity.USER_RATING,
+                                mMovieList.get(position).getUserRating());
+                        movieDetail.putExtras(movieDetailBundle);
+                        startActivity(movieDetail);
+                    }
         });
         mMovieListRv.setAdapter(mAdapter);
         if(checkNetworkConnection()) {
