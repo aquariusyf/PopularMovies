@@ -1,6 +1,8 @@
-package com.example.android.popularmovies;
+package com.example.android.popularmovies.utils;
 
 import android.util.Log;
+
+import com.example.android.popularmovies.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,13 +22,12 @@ public class JsonUtils {
     private static final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/";
     private static final String POSTER_SIZE = "w185/";
 
-    public static List<Movie> parseMovieJson(String json) {
-        if(json == null || json.isEmpty())
+    public static List<Movie> parseMovieJson(JSONObject json) {
+        if(json == null)
             return null;
 
         try {
-            JSONObject jsonRoot = new JSONObject(json);
-            JSONArray resultArray = jsonRoot.getJSONArray(RESULT);
+            JSONArray resultArray = json.getJSONArray(RESULT);
             List<Movie> movieList = new ArrayList<>();
             for(int i = 0; i < resultArray.length(); i++) {
                 String title = resultArray.getJSONObject(i).getString(TITLE);
