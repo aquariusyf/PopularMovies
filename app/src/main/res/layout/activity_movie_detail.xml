@@ -70,6 +70,7 @@
 
                 <ImageView
                     android:id="@+id/iv_mark_favorite"
+                    android:contentDescription="@string/mark_as_favorite_content_description"
                     android:src="@mipmap/star_unchecked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

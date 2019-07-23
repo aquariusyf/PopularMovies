@@ -6,4 +6,5 @@
     <string name="dummy_movie_title" translatable="false">Movie Title</string>
     <string name="dummy_movie_overview" translatable="false">This is the overview of movie</string>
     <string name="dummy_movie_rating" translatable="false">6.6/10</string>
+    <string name="mark_as_favorite_content_description">Mark As Favorite</string>
 </resources>

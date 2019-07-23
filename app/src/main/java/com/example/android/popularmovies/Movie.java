@@ -2,6 +2,7 @@ package com.example.android.popularmovies;
 
 public class Movie {
 
+    private int mId;
     private String mName;
     private String mPoster;
     private String mReleaseDate;
@@ -30,6 +31,8 @@ public class Movie {
     public String getOverView() { return mOverView; }
 
     public String getUserRating() { return mUserRating; }
+
+    public int getMovieId() { return mId; }
 
     public boolean getIsFavorite() { return mIsFavorite; }
 
