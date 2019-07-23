@@ -7,6 +7,7 @@ public class Movie {
     private String mReleaseDate;
     private String mOverView;
     private String mUserRating;
+    private boolean mIsFavorite;
 
     public Movie(String name, String poster, String releaseDate, String overView, String userRating) {
         mName = name;
@@ -29,4 +30,10 @@ public class Movie {
     public String getOverView() { return mOverView; }
 
     public String getUserRating() { return mUserRating; }
+
+    public boolean getIsFavorite() { return mIsFavorite; }
+
+    public void setIsFavorite(boolean isFavorite) {
+        mIsFavorite = isFavorite;
+    }
 }

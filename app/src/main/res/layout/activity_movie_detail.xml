@@ -67,6 +67,17 @@
                     android:fontFamily="monospace"
                     android:layout_toRightOf="@+id/iv_movie_detail_poster"
                     android:layout_below="@+id/tv_release_date"/>
+
+                <ImageView
+                    android:id="@+id/iv_mark_favorite"
+                    android:src="@mipmap/star_unchecked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_48dp"
+                    android:layout_marginTop="@dimen/dimen_8dp"
+                    android:layout_toRightOf="@id/iv_movie_detail_poster"
+                    android:layout_below="@id/tv_user_rating"/>
+
             </RelativeLayout>
 
             <TextView
@@ -80,7 +91,6 @@
                 android:textSize="@dimen/overview_text_size"
                 android:textColor="@color/colorGrey"
                 android:fontFamily="monospace"/>
-
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

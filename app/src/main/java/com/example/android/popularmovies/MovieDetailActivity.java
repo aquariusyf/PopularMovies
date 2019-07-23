@@ -24,6 +24,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ImageView mPosterIv;
     private TextView mReleaseDateTv;
     private TextView mUserRatingTv;
+    private ImageView mMarkFavoriteIv;
     private TextView mOverviewTv;
     private Bundle mBundle;
 
@@ -36,6 +37,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         mPosterIv = findViewById(R.id.iv_movie_detail_poster);
         mReleaseDateTv = findViewById(R.id.tv_release_date);
         mUserRatingTv = findViewById(R.id.tv_user_rating);
+        mMarkFavoriteIv = findViewById(R.id.iv_mark_favorite);
         mOverviewTv = findViewById(R.id.tv_overview);
 
         Intent intent = getIntent();
