@@ -10,7 +10,14 @@ public class Movie {
     private String mUserRating;
     private boolean mIsFavorite;
 
-    public Movie(String name, String poster, String releaseDate, String overView, String userRating) {
+    public Movie(
+            int id,
+            String name,
+            String poster,
+            String releaseDate,
+            String overView,
+            String userRating) {
+        mId = id;
         mName = name;
         mPoster = poster;
         mReleaseDate = releaseDate;

@@ -12,6 +12,7 @@ public class JsonUtils {
 
     private static final String LOG_TAG = JsonUtils.class.getSimpleName();
     private static final String RESULT = "results";
+    private static final String ID = "id";
     private static final String TITLE = "title";
     private static final String RELEASE_DATE = "release_date";
     private static final String OVERVIEW = "overview";
@@ -27,13 +28,14 @@ public class JsonUtils {
             JSONArray resultArray = json.getJSONArray(RESULT);
             List<Movie> movieList = new ArrayList<>();
             for(int i = 0; i < resultArray.length(); i++) {
+                int id = resultArray.getJSONObject(i).getInt(ID);
                 String title = resultArray.getJSONObject(i).getString(TITLE);
                 String poster = POSTER_BASE_URL + POSTER_SIZE
                         + resultArray.getJSONObject(i).getString(POSTER_PATH);
                 String releaseDate = resultArray.getJSONObject(i).getString(RELEASE_DATE);
                 String overView = resultArray.getJSONObject(i).getString(OVERVIEW);
                 String userRating = resultArray.getJSONObject(i).getString(USER_RATING);
-                Movie movie = new Movie(title, poster, releaseDate, overView, userRating);
+                Movie movie = new Movie(id, title, poster, releaseDate, overView, userRating);
                 movieList.add(movie);
             }
             return movieList;
