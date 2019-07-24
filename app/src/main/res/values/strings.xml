@@ -2,9 +2,12 @@
     <string name="app_name">Popular Movies</string>
     <string name="action_sort_by_most_popular">Most Popular</string>
     <string name="action_sort_by_top_rated">Top Rated</string>
+    <string name="action_show_favorite">Favorite</string>
     <string name="movie_detail_activity_title">Movie Detail</string>
     <string name="dummy_movie_title" translatable="false">Movie Title</string>
     <string name="dummy_movie_overview" translatable="false">This is the overview of movie</string>
     <string name="dummy_movie_rating" translatable="false">6.6/10</string>
     <string name="mark_as_favorite">Mark As Favorite</string>
+    <string name="add_favorite_toast">Add movie to favorite</string>
+    <string name="remove_favorite_toast">Remove movie from favorite</string>
 </resources>

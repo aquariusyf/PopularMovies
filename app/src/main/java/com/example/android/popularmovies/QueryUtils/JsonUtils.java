@@ -1,8 +1,8 @@
-package com.example.android.popularmovies.utils;
+package com.example.android.popularmovies.QueryUtils;
 
 import android.util.Log;
 
-import com.example.android.popularmovies.Movie;
+import com.example.android.popularmovies.RoomUtils.Movie;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
