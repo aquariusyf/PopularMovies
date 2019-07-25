@@ -2,6 +2,7 @@ package com.example.android.popularmovies;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,15 +87,12 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onFavoriteClick();
-                Toast.makeText(getApplicationContext(),
-                        getResources().getString(R.string.add_favorite_toast),
-                        Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void onFavoriteClick() {
-        int movieId = mBundle.getInt(MOVIE_ID);
+        final int movieId = mBundle.getInt(MOVIE_ID);
         String title = mBundle.getString(TITLE);
         String poster = mBundle.getString(POSTER);
         String releaseDate = mBundle.getString(RELEASE_DATE);
@@ -106,7 +104,28 @@ public class MovieDetailActivity extends AppCompatActivity {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.movieDao().insertMovie(newFavoriteMovie);
+                Movie movieInDb = mDb.movieDao().getMovieByMovieId(movieId);
+                if(movieInDb == null) {
+                    mDb.movieDao().insertMovie(newFavoriteMovie);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    getResources().getString(R.string.add_favorite_toast),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    mDb.movieDao().deleteMovie(movieInDb);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    getResources().getString(R.string.remove_favorite_toast),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
     }
