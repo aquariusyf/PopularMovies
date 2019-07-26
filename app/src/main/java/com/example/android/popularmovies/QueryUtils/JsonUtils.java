@@ -20,6 +20,7 @@ public class JsonUtils {
     private static final String POSTER_PATH = "poster_path";
     private static final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/";
     private static final String POSTER_SIZE = "w185/";
+    private static final String TRAILER_KEY = "key";
 
     public static List<Movie> parseMovieJson(JSONObject json) {
         if(json == null)
@@ -53,7 +54,7 @@ public class JsonUtils {
             JSONArray resultArray = json.getJSONArray(RESULT);
             List<String> trailerList = new ArrayList<>();
             for(int i = 0; i < resultArray.length(); i++) {
-                trailerList.add(resultArray.getJSONObject(i).getString(ID));
+                trailerList.add(resultArray.getJSONObject(i).getString(TRAILER_KEY));
             }
             return trailerList;
         } catch (Exception e) {

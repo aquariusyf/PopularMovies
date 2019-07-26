@@ -1,6 +1,8 @@
 package com.example.android.popularmovies.Fragment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -28,6 +30,8 @@ import java.util.List;
 public class FragmentTrailer extends Fragment {
 
     private static final String LOG_TAG = FragmentTrailer.class.getSimpleName();
+    private static final String YOUTUBE_APP_URI = "vnd.youtube:";
+    private static final String YOUTUBE_WEB_URI = "http://www.youtube.com/watch?v=";
     private List<String> mTrailerList;
     private int mMovieId;
     private TrailerAdapter mAdapter;
@@ -52,7 +56,15 @@ public class FragmentTrailer extends Fragment {
                 new TrailerAdapter.OnListItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-
+                        Intent appIntent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(YOUTUBE_APP_URI + mTrailerList.get(position)));
+                        Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(YOUTUBE_WEB_URI + mTrailerList.get(position)));
+                        try {
+                            startActivity(appIntent);
+                        } catch (ActivityNotFoundException e) {
+                            startActivity(webIntent);
+                        }
                     }
         });
         mTrailerRv.setAdapter(mAdapter);
