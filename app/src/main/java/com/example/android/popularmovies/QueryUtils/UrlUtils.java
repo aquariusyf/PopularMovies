@@ -13,6 +13,9 @@ public class UrlUtils {
     private static final String PARAM_SORT_BY = "sort_by";
     private static final String POPULARITY = "popularity.desc";
     private static final String RATING = "vote_average.desc";
+    private static final String URL_BASE_TRAILER_REVIEW = "http://api.themoviedb.org/3/movie/";
+    private static final String TRAILER = "/videos";
+    private static final String REVIEW = "/reviews";
 
     public static String createSortByPopularityUrl() {
         Uri uri = Uri.parse(URL_BASE_POPULAR).buildUpon()
@@ -25,6 +28,18 @@ public class UrlUtils {
         Uri uri = Uri.parse(URL_BASE_TOP_RATED).buildUpon()
                   .appendQueryParameter(PARAM_API_KEY, BuildConfig.THE_MOVIE_DB_API_TOKEN)
                   .appendQueryParameter(PARAM_SORT_BY, RATING).build();
+        return uri.toString();
+    }
+
+    public static String createGetTrailerUrl(int movieId) {
+        Uri uri = Uri.parse(URL_BASE_TRAILER_REVIEW + movieId + TRAILER).buildUpon()
+                .appendQueryParameter(PARAM_API_KEY, BuildConfig.THE_MOVIE_DB_API_TOKEN).build();
+        return uri.toString();
+    }
+
+    public static String createGetReviewUrl(int movieId) {
+        Uri uri = Uri.parse(URL_BASE_TRAILER_REVIEW + movieId + REVIEW).buildUpon()
+                .appendQueryParameter(PARAM_API_KEY, BuildConfig.THE_MOVIE_DB_API_TOKEN).build();
         return uri.toString();
     }
 }

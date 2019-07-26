@@ -3,6 +3,8 @@ package com.example.android.popularmovies;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Looper;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.popularmovies.Fragment.FragmentTrailer;
+import com.example.android.popularmovies.Fragment.MovieDetailViewPagerAdapter;
 import com.example.android.popularmovies.RoomUtils.AppDataBase;
 import com.example.android.popularmovies.RoomUtils.AppExecutors;
 import com.example.android.popularmovies.RoomUtils.Movie;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -37,6 +44,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     private Bundle mBundle;
     private AppDataBase mDb;
 
+    private FragmentTrailer mTrailerFragment;
+    private List<Fragment> mFragmentList;
+    private ViewPager mViewPagerContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +64,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(!checkBundle(intent))
             finish();
+        setupViewPager();
         setMovieDetail();
     }
 
@@ -128,6 +140,15 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setupViewPager() {
+        mViewPagerContainer = findViewById(R.id.vp_fragment_container);
+        mTrailerFragment = new FragmentTrailer();
+        mFragmentList = new ArrayList<>();
+        mFragmentList.add(mTrailerFragment);
+        mViewPagerContainer.setAdapter(
+                new MovieDetailViewPagerAdapter(getSupportFragmentManager(), mFragmentList));
     }
 
 }

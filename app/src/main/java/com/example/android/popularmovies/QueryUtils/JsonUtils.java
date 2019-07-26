@@ -40,7 +40,24 @@ public class JsonUtils {
             }
             return movieList;
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Can't parse JSON", e);
+            Log.e(LOG_TAG, "Can't parse Movie JSON", e);
+            return null;
+        }
+    }
+
+    public static List<String> parseTrailerJson(JSONObject json) {
+        if(json == null) {
+            return null;
+        }
+        try {
+            JSONArray resultArray = json.getJSONArray(RESULT);
+            List<String> trailerList = new ArrayList<>();
+            for(int i = 0; i < resultArray.length(); i++) {
+                trailerList.add(resultArray.getJSONObject(i).getString(ID));
+            }
+            return trailerList;
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Can't parse Trailer JSON", e);
             return null;
         }
     }

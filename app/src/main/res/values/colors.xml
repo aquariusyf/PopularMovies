@@ -8,5 +8,6 @@
     <color name="colorWhite">#FFF</color>
     <color name="colorGrey">#616161</color>
     <color name="colorBlack">#000</color>
+    <color name="colorTrailerText">#0000EE</color>
 
 </resources>

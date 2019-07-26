@@ -15,4 +15,5 @@
     <dimen name="rating_text_size">16sp</dimen>
     <dimen name="overview_text_size">18sp</dimen>
     <dimen name="mark_favorite_text_size">14sp</dimen>
+    <dimen name="trailer_text_size">16sp</dimen>
 </resources>
