@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dimen_0dp">0dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
     <dimen name="dimen_8dp">8dp</dimen>
     <dimen name="dimen_16dp">16dp</dimen>
     <dimen name="dimen_32dp">32dp</dimen>
     <dimen name="dimen_48dp">48dp</dimen>
     <dimen name="dimen_100dp">100dp</dimen>
+    <dimen name="dimen_300dp">300dp</dimen>
     <dimen name="dimen_title_height">120dp</dimen>
     <dimen name="poster_width">160dp</dimen>
     <dimen name="poster_height">220dp</dimen>

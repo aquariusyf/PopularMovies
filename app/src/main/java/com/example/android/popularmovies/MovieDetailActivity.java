@@ -2,7 +2,7 @@ package com.example.android.popularmovies;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Looper;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +49,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private FragmentReview mReviewFragment;
     private List<Fragment> mFragmentList;
     private ViewPager mViewPagerContainer;
+    private TabLayout mTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,8 +152,12 @@ public class MovieDetailActivity extends AppCompatActivity {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(mTrailerFragment);
         mFragmentList.add(mReviewFragment);
-        mViewPagerContainer.setAdapter(
-                new MovieDetailViewPagerAdapter(getSupportFragmentManager(), mFragmentList));
+        mViewPagerContainer.setAdapter(new MovieDetailViewPagerAdapter(
+                getSupportFragmentManager(),
+                mFragmentList,
+                this));
+        mTab = findViewById(R.id.tl_viewpager);
+        mTab.setupWithViewPager(mViewPagerContainer);
     }
 
 }
