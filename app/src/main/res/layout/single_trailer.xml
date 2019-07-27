@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tv_trailer_item"
-        android:drawableLeft="@drawable/play_icon_50"
+        android:drawableLeft="@drawable/play_icon_36"
         android:drawablePadding="@dimen/dimen_32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
