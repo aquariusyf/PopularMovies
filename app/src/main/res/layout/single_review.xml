@@ -6,14 +6,14 @@
     android:layout_height="@dimen/dimen_100dp">
 
     <TextView
-        android:id="@+id/tv_trailer_item"
-        android:drawableLeft="@drawable/play_icon_50"
+        android:id="@+id/tv_review_item"
+        android:drawableLeft="@drawable/open_in_browser_icon_36"
         android:drawablePadding="@dimen/dimen_32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_gravity="center"
-        tools:text="@string/dummy_trailer"
+        tools:text="@string/dummy_review"
         android:textSize="@dimen/trailer_text_size"
         android:textColor="@color/colorBlack"
         android:fontFamily="monospace" />

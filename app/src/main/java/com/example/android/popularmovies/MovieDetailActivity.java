@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.popularmovies.Fragment.FragmentReview;
 import com.example.android.popularmovies.Fragment.FragmentTrailer;
 import com.example.android.popularmovies.Fragment.MovieDetailViewPagerAdapter;
 import com.example.android.popularmovies.RoomUtils.AppDataBase;
@@ -45,6 +46,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private AppDataBase mDb;
 
     private FragmentTrailer mTrailerFragment;
+    private FragmentReview mReviewFragment;
     private List<Fragment> mFragmentList;
     private ViewPager mViewPagerContainer;
 
@@ -145,8 +147,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void setupViewPager() {
         mViewPagerContainer = findViewById(R.id.vp_fragment_container);
         mTrailerFragment = new FragmentTrailer();
+        mReviewFragment = new FragmentReview();
         mFragmentList = new ArrayList<>();
         mFragmentList.add(mTrailerFragment);
+        mFragmentList.add(mReviewFragment);
         mViewPagerContainer.setAdapter(
                 new MovieDetailViewPagerAdapter(getSupportFragmentManager(), mFragmentList));
     }

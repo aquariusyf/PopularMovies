@@ -5,6 +5,7 @@
     <dimen name="dimen_16dp">16dp</dimen>
     <dimen name="dimen_32dp">32dp</dimen>
     <dimen name="dimen_48dp">48dp</dimen>
+    <dimen name="dimen_100dp">100dp</dimen>
     <dimen name="dimen_title_height">120dp</dimen>
     <dimen name="poster_width">160dp</dimen>
     <dimen name="poster_height">220dp</dimen>

@@ -1,7 +1,6 @@
 package com.example.android.popularmovies.QueryUtils;
 
 import android.util.Log;
-
 import com.example.android.popularmovies.RoomUtils.Movie;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,6 +20,7 @@ public class JsonUtils {
     private static final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/";
     private static final String POSTER_SIZE = "w185/";
     private static final String TRAILER_KEY = "key";
+    private static final String REVIEW_URL = "url";
 
     public static List<Movie> parseMovieJson(JSONObject json) {
         if(json == null)
@@ -59,6 +59,23 @@ public class JsonUtils {
             return trailerList;
         } catch (Exception e) {
             Log.e(LOG_TAG, "Can't parse Trailer JSON", e);
+            return null;
+        }
+    }
+
+    public static List<String> parseReviewJson(JSONObject json) {
+        if(json == null) {
+            return null;
+        }
+        try {
+            JSONArray resultArray = json.getJSONArray(RESULT);
+            List<String> reviewList = new ArrayList<>();
+            for(int i = 0; i < resultArray.length(); i++) {
+                reviewList.add(resultArray.getJSONObject(i).getString(REVIEW_URL));
+            }
+            return reviewList;
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Can't parse Review JSON", e);
             return null;
         }
     }
