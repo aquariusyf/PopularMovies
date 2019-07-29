@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -36,6 +38,7 @@ public class FragmentTrailer extends Fragment {
     private int mMovieId;
     private TrailerAdapter mAdapter;
     private RecyclerView mTrailerRv;
+    private static TextView mEmptyView;
 
     public FragmentTrailer(){}
 
@@ -50,6 +53,7 @@ public class FragmentTrailer extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getMovieId();
+        mEmptyView = getActivity().findViewById(R.id.tv_trailer_empty);
         mTrailerRv = getActivity().findViewById(R.id.rv_trailer_list);
         mTrailerRv.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new TrailerAdapter(getContext(), mTrailerList,
@@ -72,6 +76,14 @@ public class FragmentTrailer extends Fragment {
         mTrailerRv.addItemDecoration(
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         fetchTrailerData(UrlUtils.createGetTrailerUrl(mMovieId));
+    }
+
+    public static void setEmptyView(boolean isEmpty) {
+        if(isEmpty) {
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+        }
     }
 
     private void getMovieId() {

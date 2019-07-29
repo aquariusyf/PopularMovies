@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
@@ -35,6 +36,7 @@ public class FragmentReview extends Fragment {
     private int mMovieId;
     private ReviewAdapter mAdapter;
     private RecyclerView mReviewRv;
+    private static TextView mEmptyView;
 
     public FragmentReview(){}
 
@@ -49,6 +51,7 @@ public class FragmentReview extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getMovieId();
+        mEmptyView = getActivity().findViewById(R.id.tv_review_empty);
         mReviewRv = getActivity().findViewById(R.id.rv_review_list);
         mReviewRv.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ReviewAdapter(getContext(), mReviewList,
@@ -65,6 +68,14 @@ public class FragmentReview extends Fragment {
         mReviewRv.addItemDecoration(
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         fetchReviewData(UrlUtils.createGetReviewUrl(mMovieId));
+    }
+
+    public static void setmEmptyView(boolean isEmpty) {
+        if(isEmpty) {
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+        }
     }
 
     private void getMovieId() {

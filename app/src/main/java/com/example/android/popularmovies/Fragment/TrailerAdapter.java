@@ -50,6 +50,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     public void updateDataSet(List<String> newTrailerList) {
         mTrailerList = newTrailerList;
+        FragmentTrailer.setEmptyView(mTrailerList == null || mTrailerList.isEmpty());
         notifyDataSetChanged();
     }
 

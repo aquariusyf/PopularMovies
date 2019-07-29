@@ -7,8 +7,17 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_trailer_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:id="@+id/tv_trailer_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/no_trailer_found_text"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/title_text_size"
+        android:visibility="gone"/>
 
 </FrameLayout>
