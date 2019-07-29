@@ -27,11 +27,14 @@ import com.example.android.popularmovies.QueryUtils.JsonUtils;
 import com.example.android.popularmovies.QueryUtils.UrlUtils;
 import com.example.android.popularmovies.ViewModelUtils.MainViewModel;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String MOVIE_LIST_KEY = "movie_list";
     private ProgressBar mLoadingProgressBar;
     private RecyclerView mMovieListRv;
     private MovieListAdapter mAdapter;
@@ -75,9 +78,27 @@ public class MainActivity extends AppCompatActivity {
                     }
         });
         mMovieListRv.setAdapter(mAdapter);
-        if(checkNetworkConnection()) {
+        setupViewModel();
+        if(!restoreUserData(savedInstanceState) && checkNetworkConnection()) {
             fetchMovieData(UrlUtils.createSortByPopularityUrl());
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(MOVIE_LIST_KEY, (ArrayList)mMovieList);
+    }
+
+    private boolean restoreUserData(Bundle savedInstanceState) {
+        if(savedInstanceState == null) {
+            return false;
+        }
+        mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST_KEY);
+        mAdapter.updateDataSet(mMovieList);
+        mLoadingProgressBar.setVisibility(View.INVISIBLE);
+        Log.v(LOG_TAG, "User data restored");
+        return true;
     }
 
     private void setupViewModel() {
