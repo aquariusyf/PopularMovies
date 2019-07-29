@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String MOVIE_LIST_KEY = "movie_list";
     private ProgressBar mLoadingProgressBar;
+    private static TextView mEmptyView;
     private RecyclerView mMovieListRv;
     private MovieListAdapter mAdapter;
     private List<Movie> mMovieList;
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mLoadingProgressBar = findViewById(R.id.pb_loading);
+        mEmptyView = findViewById(R.id.tv_movie_list_empty);
         mMovieListRv = findViewById(R.id.rv_movie_list);
         mMovieListRv.setLayoutManager(new GridLayoutManager(this,
                 2,
@@ -99,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
         mLoadingProgressBar.setVisibility(View.INVISIBLE);
         Log.v(LOG_TAG, "User data restored");
         return true;
+    }
+
+    public static void setEmptyView(boolean isEmpty) {
+        if(isEmpty) {
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+        }
     }
 
     private void setupViewModel() {

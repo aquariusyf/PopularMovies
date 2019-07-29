@@ -17,4 +17,7 @@
     <string name="review_text">Review #</string>
     <string name="tab_title_trailers">Trailers</string>
     <string name="tab_title_reviews">Reviews</string>
+    <string name="no_movie_found_text">No Movie Data</string>
+    <string name="no_trailer_found_text">No Trailers</string>
+    <string name="no_review_found_text">No Reviews</string>
 </resources>

@@ -51,6 +51,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void updateDataSet(List<Movie> newMovieList) {
         mMovies = newMovieList;
+        MainActivity.setEmptyView(mMovies == null || mMovies.isEmpty());
         notifyDataSetChanged();
     }
 
