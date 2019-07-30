@@ -135,6 +135,5 @@ public class FragmentTrailer extends Fragment {
                     }
                 });
         queue.add(jsonRequest);
-        queue.start();
     }
 }

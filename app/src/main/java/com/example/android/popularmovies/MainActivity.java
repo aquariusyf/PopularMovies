@@ -181,6 +181,5 @@ public class MainActivity extends AppCompatActivity {
                 });
         mQueue = Volley.newRequestQueue(this);
         mQueue.add(mJsonObjectRequest);
-        mQueue.start();
     }
 }

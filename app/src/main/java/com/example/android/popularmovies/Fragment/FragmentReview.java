@@ -124,6 +124,5 @@ public class FragmentReview extends Fragment {
                     }
                 });
         queue.add(jsonRequest);
-        queue.start();
     }
 }
