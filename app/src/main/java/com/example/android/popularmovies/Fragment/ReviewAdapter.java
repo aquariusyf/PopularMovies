@@ -50,7 +50,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     public void updateDataSet(List<String> newReviewList) {
         mReviewList = newReviewList;
-        FragmentReview.setmEmptyView(mReviewList == null || mReviewList.isEmpty());
+        FragmentReview.setEmptyView(mReviewList == null || mReviewList.isEmpty());
         notifyDataSetChanged();
     }
 

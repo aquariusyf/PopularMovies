@@ -27,6 +27,7 @@ import com.example.android.popularmovies.R;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentTrailer extends Fragment {
@@ -34,6 +35,7 @@ public class FragmentTrailer extends Fragment {
     private static final String LOG_TAG = FragmentTrailer.class.getSimpleName();
     private static final String YOUTUBE_APP_URI = "vnd.youtube:";
     private static final String YOUTUBE_WEB_URI = "http://www.youtube.com/watch?v=";
+    private static final String TRAILER_LIST_KEY = "trailer_list";
     private List<String> mTrailerList;
     private int mMovieId;
     private TrailerAdapter mAdapter;
@@ -75,7 +77,26 @@ public class FragmentTrailer extends Fragment {
         mTrailerRv.setHasFixedSize(true);
         mTrailerRv.addItemDecoration(
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        fetchTrailerData(UrlUtils.createGetTrailerUrl(mMovieId));
+        if(!restoreUserData(savedInstanceState)) {
+            fetchTrailerData(UrlUtils.createGetTrailerUrl(mMovieId));
+        }
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList(TRAILER_LIST_KEY, (ArrayList)mTrailerList);
+    }
+
+    private boolean restoreUserData(Bundle savedInstanceState) {
+        if(savedInstanceState == null) {
+            return false;
+        }
+        mTrailerList = savedInstanceState.getStringArrayList(TRAILER_LIST_KEY);
+        mAdapter.updateDataSet(mTrailerList);
+        Log.v(LOG_TAG, "Trailer data restored");
+        return true;
     }
 
     public static void setEmptyView(boolean isEmpty) {

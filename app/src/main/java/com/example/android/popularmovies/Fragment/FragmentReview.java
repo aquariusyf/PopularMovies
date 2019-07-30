@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,11 +25,13 @@ import com.example.android.popularmovies.R;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentReview extends Fragment {
 
     private static final String LOG_TAG = FragmentReview.class.getSimpleName();
+    private static final String REVIEW_LIST_KEY = "review_list";
     private List<String> mReviewList;
     private int mMovieId;
     private ReviewAdapter mAdapter;
@@ -67,10 +67,28 @@ public class FragmentReview extends Fragment {
         mReviewRv.setHasFixedSize(true);
         mReviewRv.addItemDecoration(
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        fetchReviewData(UrlUtils.createGetReviewUrl(mMovieId));
+        if(!restoreUserData(savedInstanceState)) {
+            fetchReviewData(UrlUtils.createGetReviewUrl(mMovieId));
+        }
     }
 
-    public static void setmEmptyView(boolean isEmpty) {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList(REVIEW_LIST_KEY, (ArrayList)mReviewList);
+    }
+
+    private boolean restoreUserData(Bundle savedInstanceState) {
+        if(savedInstanceState == null) {
+            return false;
+        }
+        mReviewList = savedInstanceState.getStringArrayList(REVIEW_LIST_KEY);
+        mAdapter.updateDataSet(mReviewList);
+        Log.v(LOG_TAG, "Review data restored");
+        return true;
+    }
+
+    public static void setEmptyView(boolean isEmpty) {
         if(isEmpty) {
             mEmptyView.setVisibility(View.VISIBLE);
         } else {
